@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template2">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+      href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<c:url value="/css/main.css" var="jstlCss" />
+<link href="${jstlCss}" rel="stylesheet" />
+<script type="text/javascript"
+        src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+  <title>Modifier un Equipe</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+  <div class="container mt-5">
+    <div class="card-body">
+      <form action="updateEquipe" method="post">
+        <div class="form-group">
+          <label class="control-label" th:for="idEquipe">ID Equipe :</label>
+          <input type="text" name="idEquipe" th:value="${equipe.idEquipe}"
+                 readonly class="form-control" />
+        </div>
+        <div class="form-group">
+          <label class="control-label" th:for="nomEquipe">Nom Equipe :</label>
+          <input type="text" name="nomEquipe" th:value="${equipe.nomEquipe}"
+                 class="form-control" />
+          <span th:errors= "*{equipe.nomEquipe}" class="text-danger"> </span>
+
+        </div>
+        <div class="form-group">
+          <label class="control-label" th:for="paysEquipe">pays d' equipe :</label>
+          <input type="text" name="paysEquipe" th:value="${equipe.paysEquipe}"
+                 class="form-control" />
+            <span th:errors= "*{equipe.paysEquipe}" class="text-danger"> </span>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" th:for="dateFound">Date found :</label>
+          <input type="date" name="date" th:value="${#dates.format(equipe.dateFound, 'yyyy-MM-dd')}"
+                 class="form-control" id="dateFound"/>
+            <span th:errors= "*{equipe.dateFound}" class="text-danger"> </span>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+      </form>
+    </div>
+    <br/>
+    <br/>
+    <a href="ListeEquipe">Liste Equipes</a>
+  </div>
+</div>
+</body>
+</html>

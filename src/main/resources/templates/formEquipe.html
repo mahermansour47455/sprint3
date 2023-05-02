@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template2">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter Equipe</title>
+  <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header" th:if="${mode=='new'}"> Ajout des equipes </div>
+      <div class="card-header" th:if="${mode=='edit'}">Modification des equipes
+      </div>
+    <div class="card-body">
+      <form  action="saveEquipe" method="post">
+        <div class="form-group">
+          <div class="form-group">
+            <label class="control-label">id d' equipe :</label>
+            <input type="text" name="idEquipe" class="form-control"  th:value="${equipe.idEquipe}"/>
+            <span th:errors= "*{equipe.idEquipe}" class="text-danger"> </span>
+
+          </div>
+
+          <label class="control-label">Nom Equipe :</label>
+          <input type="text"   th:value="${page}"/>
+          <input type="text" name="nomEquipe" class="form-control"  th:value="${equipe.nomEquipe}"/>
+
+          <span th:errors= "*{equipe.nomEquipe}" class="text-danger"> </span>
+
+        </div>
+        <div class="form-group">
+          <label class="control-label">Pays d' equipe :</label>
+          <input type="text" name="paysEquipe" class="form-control"  th:value="${equipe.paysEquipe}"/>
+          <span th:errors= "*{equipe.paysEquipe}" class="text-danger"> </span>
+
+        </div>
+        <div class="form-group">
+          <label class="control-label">date found :</label>
+          <input type="date" name="dateFound" class="form-control" th:value="${equipe.dateFound}"/>
+          <span th:errors= "*{equipe.dateFound}" class="text-danger"> </span>
+
+        </div>
+        <div class="form-group">
+          <label for="League">select la league</label>
+          <select class="form-control form-control-lg" id="League" name="League.idLeg">
+            <option value="">select la league</option>
+            <option th:each="leagues : ${leagues}"
+                    th:value="${leagues.idLeg}"
+                    th:text="${leagues.nomLeague}"
+                    th:selected="${selectedLeague != null and leagues.idLeg == selectedLeague.idLeg}">
+
+
+            </option>
+          </select>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+      </form>
+    </div>
+    <br/>
+    <br/>
+    <a href="ListeEquipe">Liste produit</a>
+  </div>
+</div>
+
+</body>
+</html>
